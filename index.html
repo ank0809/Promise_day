@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Promise Day 🤝❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-top: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.promise-container {
+    margin: 30px auto;
+    width: 180px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+button {
+    background: #fff;
+    color: #6a11cb;
+    border: none;
+    padding: 12px 22px;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup-content {
+    background: #fff;
+    color: #6a11cb;
+    padding: 25px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 320px;
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.tap-note {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 10px;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* 🌟 Confetti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    opacity: 0.8;
+    top: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body onclick="enableSound()">
+
+<h1>Happy Promise Day, My Forever 💞</h1>
+
+<p>
+A promise isn’t just words,<br>
+it’s a vow from my heart to yours —<br>
+that I’ll stand by you, always,<br>
+through every high and low 🤝
+</p>
+
+<div class="promise-container">
+<svg viewBox="0 0 200 300" width="100%">
+    <!-- Interlocked hands as promise symbol -->
+    <circle cx="80" cy="100" r="40" fill="#ff6f91"/>
+    <circle cx="120" cy="100" r="40" fill="#ff758c"/>
+    <rect x="95" y="140" width="10" height="120" fill="#2ecc71"/>
+    <ellipse cx="70" cy="230" rx="30" ry="15" fill="#2ecc71"/>
+    <ellipse cx="130" cy="230" rx="30" ry="15" fill="#2ecc71"/>
+</svg>
+</div>
+
+<p>
+Just like a promise needs trust to last,<br>
+my heart promises to love and cherish you<br>
+forever and always ❤️
+</p>
+
+<button onclick="openPopup()">🤝 Make a Promise 🤝</button>
+
+<div class="tap-note">( 💗 )</div>
+
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgMusic" autoplay loop muted>
+    <source src="https://raw.githubusercontent.com/ank0809/Rose-day/e8b44a007b0661bc1c584f677fe703e3a44e7676/tum-se-hi-from-jab-we-met_8h436GOY.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 💌 POPUP -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2>My Promise to You 🤝</h2>
+        <p>
+        I promise to stand by you,<br>
+        to laugh with you, to comfort you,<br>
+        and to love you more each day.<br><br>
+        I promise to be your problem solver for any trouble,<br>
+        your shoulder to lean on in sadness,<br>
+        and your forever support in everything you do.<br><br>
+        Because with you, forever isn’t long enough 💕
+        </p>
+        <button onclick="closePopup()">Close 💗</button>
+    </div>
+</div>
+
+<footer>
+Always yours, through every promise 🌸<br>
+— Your Problem Solver 🫠😗
+</footer>
+
+<script>
+let soundEnabled = false;
+
+function enableSound() {
+    if (!soundEnabled) {
+        const music = document.getElementById("bgMusic");
+        music.muted = false;
+        music.play();
+        soundEnabled = true;
+    }
+}
+
+function openPopup() {
+    document.getElementById("popup").style.display = "flex";
+    launchConfetti();
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// 🌟 Confetti function
+function launchConfetti() {
+    const colors = ['#ff4d6d', '#ff6f91', '#ff758c', '#6a11cb', '#2575fc', '#ffe066'];
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.style.width = confetti.style.height = (Math.random() * 8 + 5) + 'px';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 3000);
+    }
+}
+</script>
+
+</body>
+</html>

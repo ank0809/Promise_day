@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f9c0d9, #d5b8f4); /* cute pastel pink + lavender */
+    background: linear-gradient(135deg, #f9c0d9, #d5b8f4);
     color: #fff;
     text-align: center;
     padding: 20px;
@@ -49,6 +49,9 @@ button {
     cursor: pointer;
     margin-top: 20px;
 }
+button:focus {
+    outline: none;
+}
 
 .popup {
     display: none;
@@ -62,14 +65,14 @@ button {
 }
 
 .popup-content {
-    background: #ffe0e6; /* soft pink popup */
-    color: #ff4d6d; /* cute text color */
+    background: #ffe0e6;
+    color: #ff4d6d;
     padding: 25px;
     border-radius: 20px;
     width: 85%;
     max-width: 320px;
     animation: pop 0.4s ease;
-    font-family: 'Courier New', monospace; /* typewriter style */
+    font-family: 'Courier New', monospace;
     font-size: 1rem;
     text-align: left;
     white-space: pre-wrap;
@@ -78,10 +81,9 @@ button {
 }
 
 .popup-text {
-    min-height: 160px; /* space for typing text */
+    min-height: 160px;
 }
 
-/* Close button */
 .popup-content button {
     display: block;
     margin: 10px auto 0 auto;
@@ -106,7 +108,6 @@ footer {
     opacity: 0.9;
 }
 
-/* 🌟 Confetti */
 .confetti, .sparkle {
     position: absolute;
     pointer-events: none;
@@ -114,14 +115,12 @@ footer {
     z-index: 999;
 }
 
-/* Confetti style */
 .confetti {
     width: 10px;
     height: 10px;
     animation: fall 3s linear forwards;
 }
 
-/* Sparkle style */
 .sparkle {
     width: 4px;
     height: 4px;
@@ -174,7 +173,7 @@ forever and always ❤️
 <div class="tap-note">( 💗 )</div>
 
 <audio id="bgMusic" autoplay loop muted>
-    <source src="https://github.com/ank0809/Promise_day/blob/118e5e9df35eb3a6feddd8d68795e88cb72ac34e/Jab_Harry_Met_Sejal_-_Hawayein%20(mp3cut.net).mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/ank0809/Promise_day/118e5e9df35eb3a6feddd8d68795e88cb72ac34e/Jab_Harry_Met_Sejal_-_Hawayein%20(mp3cut.net).mp3" type="audio/mpeg">
 </audio>
 
 <div class="popup" id="popup">
@@ -205,6 +204,7 @@ function openPopup() {
     document.getElementById("popup").style.display = "flex";
     launchConfettiAndSparkles();
     typePopupText();
+    document.querySelector('#popup button').focus();
 }
 
 function closePopup() {
@@ -213,6 +213,9 @@ function closePopup() {
 
 // 🌟 Confetti + Sparkles
 function launchConfettiAndSparkles() {
+    // Remove old confetti/sparkles first
+    document.querySelectorAll('.confetti, .sparkle').forEach(el => el.remove());
+
     const confettiColors = ['#ff4d6d', '#ff6f91', '#ff758c', '#ffd1dc', '#ffe066'];
     for (let i = 0; i < 80; i++) {
         const confetti = document.createElement('div');

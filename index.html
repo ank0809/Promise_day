@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Promise Day 🤝❤️</title>
+<title>Happy Promise Day 🤝💖</title>
 
 <style>
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* soft pink gradient */
     color: #fff;
     text-align: center;
     padding: 20px;
@@ -41,7 +41,7 @@ p {
 
 button {
     background: #fff;
-    color: #6a11cb;
+    color: #ff4d6d;
     border: none;
     padding: 12px 22px;
     font-size: 1rem;
@@ -55,20 +55,25 @@ button {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
     z-index: 10;
 }
 
 .popup-content {
-    background: #fff;
-    color: #6a11cb;
+    background: #ffe0e6; /* soft pink popup */
+    color: #ff4d6d; /* cute text color */
     padding: 25px;
     border-radius: 20px;
     width: 85%;
     max-width: 320px;
     animation: pop 0.4s ease;
+    font-family: 'Courier New', monospace; /* typewriter style */
+    font-size: 1rem;
+    text-align: left;
+    white-space: pre-wrap;
+    min-height: 180px;
 }
 
 @keyframes pop {
@@ -89,22 +94,37 @@ footer {
 }
 
 /* 🌟 Confetti */
-.confetti {
+.confetti, .sparkle {
     position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+/* Confetti style */
+.confetti {
     width: 10px;
     height: 10px;
-    background-color: #fff;
-    opacity: 0.8;
-    top: 0;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999;
     animation: fall 3s linear forwards;
 }
 
+/* Sparkle style */
+.sparkle {
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    opacity: 0.9;
+    animation: sparkleFall 2s linear forwards;
+}
+
 @keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); }
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes sparkleFall {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
 }
 </style>
 </head>
@@ -148,18 +168,8 @@ forever and always ❤️
 
 <!-- 💌 POPUP -->
 <div class="popup" id="popup">
-    <div class="popup-content">
-        <h2>My Promise to You 🤝</h2>
-        <p>
-        I promise to stand by you,<br>
-        to laugh with you, to comfort you,<br>
-        and to love you more each day.<br><br>
-        I promise to be your problem solver for any trouble,<br>
-        your shoulder to lean on in sadness,<br>
-        and your forever support in everything you do.<br><br>
-        Because with you, forever isn’t long enough 💕
-        </p>
-        <button onclick="closePopup()">Close 💗</button>
+    <div class="popup-content" id="popupText">
+        <!-- Text will appear letter by letter -->
     </div>
 </div>
 
@@ -182,29 +192,69 @@ function enableSound() {
 
 function openPopup() {
     document.getElementById("popup").style.display = "flex";
-    launchConfetti();
+    launchConfettiAndSparkles();
+    typePopupText();
 }
 
 function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-// 🌟 Confetti function
-function launchConfetti() {
-    const colors = ['#ff4d6d', '#ff6f91', '#ff758c', '#6a11cb', '#2575fc', '#ffe066'];
-    for (let i = 0; i < 100; i++) {
+// 🌟 Confetti + Sparkles function
+function launchConfettiAndSparkles() {
+    const confettiColors = ['#ff4d6d', '#ff6f91', '#ff758c', '#ffd1dc', '#ffe066'];
+    // Confetti
+    for (let i = 0; i < 80; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
         confetti.style.left = Math.random() * window.innerWidth + 'px';
         confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
         confetti.style.width = confetti.style.height = (Math.random() * 8 + 5) + 'px';
         document.body.appendChild(confetti);
 
-        setTimeout(() => {
-            confetti.remove();
-        }, 3000);
+        setTimeout(() => confetti.remove(), 3000);
     }
+    // Sparkles
+    for (let i = 0; i < 50; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * window.innerWidth + 'px';
+        sparkle.style.backgroundColor = '#fff';
+        sparkle.style.width = sparkle.style.height = (Math.random() * 4 + 2) + 'px';
+        sparkle.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 2500);
+    }
+}
+
+// ✨ Typing effect for popup
+const popupMessage = `
+I promise to stand by you,
+to laugh with you, to comfort you,
+and to love you more each day.
+
+I promise to be your problem solver for any trouble,
+your shoulder to lean on in sadness,
+and your forever support in everything you do.
+
+Because with you, forever isn’t long enough 💕
+`;
+
+function typePopupText() {
+    const popupText = document.getElementById('popupText');
+    popupText.innerHTML = '';
+    let index = 0;
+
+    function type() {
+        if (index < popupMessage.length) {
+            popupText.innerHTML += popupMessage[index] === '\n' ? '<br>' : popupMessage[index];
+            index++;
+            setTimeout(type, 40);
+        }
+    }
+    type();
 }
 </script>
 
